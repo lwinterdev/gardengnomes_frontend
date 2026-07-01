@@ -1,1 +1,35 @@
-<p>edit-gnome.component works!</p>
+<div class="edit-gnome-container">
+
+  <h2>Edit Gnome</h2>
+
+  <p *ngIf="loading">Loading...</p>
+
+  <form (ngSubmit)="updateGnome()" *ngIf="!loading">
+
+    <label>Username</label>
+    <input
+      type="text"
+      [(ngModel)]="username"
+      name="username"
+      required
+    />
+
+    <label>Display Name</label>
+    <input
+      type="text"
+      [(ngModel)]="displayName"
+      name="displayName"
+      required
+    />
+
+    <button type="submit" [disabled]="loading">
+      Update Gnome
+    </button>
+
+  </form>
+
+  <p *ngIf="error" style="color:red;">
+    {{ error }}
+  </p>
+
+</div>

@@ -24,11 +24,11 @@ export class LoginComponent{
 
     constructor(
 
-        private auth:AuthService,
+        private readonly auth:AuthService,
 
-        private storage:TokenStorageService,
+        private readonly storage:TokenStorageService,
 
-        private router:Router
+        private readonly router:Router
 
     ){}
 
