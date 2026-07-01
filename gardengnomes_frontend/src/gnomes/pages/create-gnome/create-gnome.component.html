@@ -1,1 +1,33 @@
-<p>create-gnome.component works!</p>
+<div class="create-gnome-container">
+
+  <h2>Create Gnome</h2>
+
+  <form (ngSubmit)="createGnome()">
+
+    <label>Username</label>
+    <input
+      type="text"
+      [(ngModel)]="username"
+      name="username"
+      required
+    />
+
+    <label>Display Name</label>
+    <input
+      type="text"
+      [(ngModel)]="displayName"
+      name="displayName"
+      required
+    />
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Creating...' : 'Create Gnome' }}
+    </button>
+
+  </form>
+
+  <p *ngIf="error" style="color:red;">
+    {{ error }}
+  </p>
+
+</div>
