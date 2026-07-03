@@ -21,4 +21,13 @@ export class TokenStorageService {
         return this.get() != null;
     }
 
+    saveAuth(token: string, role: string) {
+        localStorage.setItem('jwt', token);
+        localStorage.setItem('role', role);
+    }
+
+    getRole(): string | null {
+        return localStorage.getItem('role');
+    }
+
 }

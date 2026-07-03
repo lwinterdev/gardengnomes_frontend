@@ -26,8 +26,11 @@
 
   </form>
 
-  <p *ngIf="error" style="color:red;">
-    {{ error }}
-  </p>
+    @if (error){
+        <p  style="color:red;">
+            {{ error }}
+        </p>
+    }   
+  
 
 </div>

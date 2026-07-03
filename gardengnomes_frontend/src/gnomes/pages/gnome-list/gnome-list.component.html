@@ -1,1 +1,43 @@
-<p>gnome-list.component works!</p>
+<div class="gnome-list-container">
+
+  <h2>Gnome List</h2>
+
+  <p *ngIf="loading">Loading gnomes...</p>
+
+  <p *ngIf="error" style="color:red;">
+    {{ error }}
+  </p>
+
+  <a routerLink="/gnomes/create" class="create-button">
+    + Create Gnome
+  </a>
+
+  <div class="gnome-grid">
+
+    <div class="gnome-card" *ngFor="let gnome of gnomes">
+
+      <h3>{{ gnome.displayName }}</h3>
+
+      <p><b>Username:</b> {{ gnome.username }}</p>
+
+      <p><b>ID:</b> {{ gnome.id }}</p>
+
+      <p><b>Created:</b> {{ gnome.createdAt | date:'medium' }}</p>
+
+      <div class="actions">
+
+        <a [routerLink]="['/gnomes', gnome.id, 'edit']">
+          Edit
+        </a>
+
+        <button (click)="deleteGnome(gnome.id)">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

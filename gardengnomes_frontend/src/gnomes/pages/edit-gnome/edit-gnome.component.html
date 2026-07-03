@@ -2,7 +2,10 @@
 
   <h2>Edit Gnome</h2>
 
-  <p *ngIf="loading">Loading...</p>
+  @if (loading){
+    <p>Loading...</p>
+  }
+  
 
   <form (ngSubmit)="updateGnome()" *ngIf="!loading">
 
@@ -28,8 +31,11 @@
 
   </form>
 
-  <p *ngIf="error" style="color:red;">
-    {{ error }}
-  </p>
+  @if (error){
+     <p style="color:red;">
+        {{ error }}
+    </p>
+  }
+ 
 
 </div>
