@@ -1,53 +1,71 @@
-import { Component } from '@angular/core';
-
-import { FormsModule } from '@angular/forms';
-
-import { Router } from '@angular/router';
-
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth.service';
-import { TokenStorageService } from '../../token-storage.service';
-
 
 
 @Component({
-    selector:'app-login',
-    standalone:true,
-    imports:[FormsModule],
-    templateUrl:'./login.component.html',
-    styleUrl:'./login.component.css'
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink
+  ],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class LoginComponent{
+export class LoginComponent {
 
-    username="";
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-    password="";
+  loading = false;
+  errorMessage = '';
 
-    constructor(
+  loginForm = this.fb.nonNullable.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  });
 
-        private readonly auth:AuthService,
+  login(): void {
 
-        private readonly storage:TokenStorageService,
+    this.errorMessage = '';
 
-        private readonly router:Router
-
-    ){}
-
-    login(){
-
-        this.auth.login({
-
-            username:this.username,
-
-            password:this.password
-
-        }).subscribe(response=>{
-
-            this.storage.save(response.token);
-
-            this.router.navigate(['/']);
-
-        });
-
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
     }
+
+    this.loading = true;
+
+    this.authService.login(this.loginForm.getRawValue()).subscribe({
+
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/home']);
+      },
+
+      error: (error) => {
+
+        this.loading = false;
+
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid username or password.';
+        } else {
+          this.errorMessage =
+            'Unable to contact the server. Please try again.';
+        }
+      }
+
+    });
+
+  }
 
 }

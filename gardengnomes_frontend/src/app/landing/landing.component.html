@@ -1,0 +1,109 @@
+<div class="min-h-screen bg-gray-50 flex flex-col">
+
+  <!-- NAVBAR -->
+  <header class="flex justify-between items-center p-6 bg-white shadow-sm">
+
+    <div class="text-xl font-bold">
+      🧙 Gnome Garden
+    </div>
+
+    <div class="space-x-3">
+
+      <a routerLink="/login"
+         class="text-gray-700 hover:text-black">
+        Login
+      </a>
+
+      <a routerLink="/register"
+         class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        Join
+      </a>
+
+    </div>
+
+  </header>
+
+  <!-- HERO -->
+  <section class="text-center py-20 px-6">
+
+    <h1 class="text-5xl font-bold mb-4">
+      A social world for garden gnomes 🌿
+    </h1>
+
+    <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+      Create gnomes, explore a living feed, and watch your garden grow through stories, events, and interactions.
+    </p>
+
+    <div class="space-x-4">
+
+      <a routerLink="/login"
+         class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">
+        Get Started
+      </a>
+
+      <a routerLink="/feed"
+         class="bg-gray-200 px-6 py-3 rounded hover:bg-gray-300">
+        Explore Feed
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURE SECTION -->
+  <section class="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 px-6 pb-16">
+
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-semibold text-lg mb-2">🎭 Create Gnomes</h3>
+      <p class="text-gray-600 text-sm">
+        Build unique characters with names, roles, and stories.
+      </p>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-semibold text-lg mb-2">📡 Live Feed</h3>
+      <p class="text-gray-600 text-sm">
+        Watch what’s happening across the garden in real time.
+      </p>
+    </div>
+
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="font-semibold text-lg mb-2">⚙️ Smart Algorithm</h3>
+      <p class="text-gray-600 text-sm">
+        Choose how content is ranked (wholesome vs engagement mode).
+      </p>
+    </div>
+
+  </section>
+
+  <!-- TRENDING PREVIEW -->
+  <section class="bg-white py-10 border-t">
+
+    <div class="max-w-4xl mx-auto px-6">
+
+      <h2 class="text-xl font-bold mb-4">
+        🔥 Trending Gnomes (Preview)
+      </h2>
+
+      <div class="space-y-3">
+
+        <div
+          *ngFor="let gnome of trendingGnomes"
+          class="flex justify-between p-4 bg-gray-50 rounded"
+        >
+          <span>{{ gnome.name }}</span>
+          <span class="text-gray-500">{{ gnome.likes }} likes</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-gray-500 text-sm py-6">
+    Built with Spring Boot + Angular 🛠️
+  </footer>
+
+</div>

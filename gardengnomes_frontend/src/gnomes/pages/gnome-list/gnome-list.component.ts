@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { DatePipe} from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { GnomeService } from '../../gnome.service';
@@ -8,7 +8,7 @@ import { Gnome } from '../../models/gnome.model';
 @Component({
   selector: 'app-gnome-list',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe],
   templateUrl: './gnome-list.component.html',
   styleUrl: './gnome-list.component.css'
 })

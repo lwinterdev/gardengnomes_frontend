@@ -1,27 +1,105 @@
-<div class="login-container">
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
 
-    <h2>Login</h2>
+  <div class="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
 
-    <form (ngSubmit)="login()">
+    <h1 class="mb-2 text-center text-3xl font-bold">
+      Welcome Back
+    </h1>
+
+    <p class="mb-8 text-center text-gray-500">
+      Sign in to continue to Gnome Garden.
+    </p>
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()"
+      class="space-y-5">
+
+      @if (errorMessage) {
+        <div class="rounded border border-red-300 bg-red-100 p-3 text-red-700">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <!-- Username -->
+      <div>
+
+        <label
+          for="username"
+          class="mb-2 block font-medium">
+          Username
+        </label>
 
         <input
-            type="text"
-            [(ngModel)]="username"
-            name="username"
-            placeholder="Username">
+          id="username"
+          type="text"
+          formControlName="username"
+          class="w-full rounded border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+
+        @if (
+          loginForm.controls.username.invalid &&
+          loginForm.controls.username.touched
+        ) {
+          <p class="mt-1 text-sm text-red-600">
+            Username is required.
+          </p>
+        }
+
+      </div>
+
+      <!-- Password -->
+      <div>
+
+        <label
+          for="password"
+          class="mb-2 block font-medium">
+          Password
+        </label>
 
         <input
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-            placeholder="Password">
+          id="password"
+          type="password"
+          formControlName="password"
+          class="w-full rounded border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
 
-        <button type="submit">
+        @if (
+          loginForm.controls.password.invalid &&
+          loginForm.controls.password.touched
+        ) {
+          <p class="mt-1 text-sm text-red-600">
+            Password is required.
+          </p>
+        }
 
-            Login
+      </div>
 
-        </button>
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full rounded bg-green-600 py-2 text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50">
+
+        @if (loading) {
+          Signing in...
+        } @else {
+          Sign In
+        }
+
+      </button>
 
     </form>
+
+    <div class="mt-6 text-center text-sm">
+
+      Don't have an account?
+
+      <a
+        routerLink="/register"
+        class="font-medium text-green-600 hover:underline">
+        Register
+      </a>
+
+    </div>
+
+  </div>
 
 </div>
