@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
@@ -19,11 +19,21 @@ export class GnomeService{
 
     constructor(private readonly http:HttpClient){}
 
-    getAll():Observable<Gnome[]>{
+    getAll(
+    page: number,
+    size: number,
+    sort: string,
+    search: string
+  ): Observable<Gnome[]> {
 
-        return this.http.get<Gnome[]>(this.api);
+    const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('sort', sort)
+      .set('search', search);
 
-    }
+    return this.http.get<Gnome[]>(this.api, { params });
+  }
 
     getById(id:string):Observable<Gnome>{
 

@@ -11,9 +11,9 @@ export const routes: Routes = [
         component:LoginComponent
     },
 
- {
-    path: '',
-    component: LandingComponent
-  }
+    {
+        path: '',
+        component: LandingComponent
+      }
 
 ];

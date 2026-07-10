@@ -17,6 +17,10 @@ export class GnomeListComponent implements OnInit {
   gnomes: Gnome[] = [];
   loading = false;
   error = '';
+  page = 1;
+  size = 10;
+  sort = "";
+  search = "";
 
   constructor(private readonly gnomeService: GnomeService) {}
 
@@ -28,7 +32,7 @@ export class GnomeListComponent implements OnInit {
     this.loading = true;
     this.error = '';
 
-    this.gnomeService.getAll().subscribe({
+    this.gnomeService.getAll(this.page, this.size , this.sort , this.search).subscribe({
       next: (data) => {
         this.gnomes = data;
         this.loading = false;
